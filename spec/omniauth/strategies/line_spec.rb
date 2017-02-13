@@ -26,7 +26,7 @@ describe OmniAuth::Strategies::Line do
     end
 
     it 'should have correct token url' do
-      expect(subject.options.client_options.token_url).to eq('/v1/oauth/accessToken')
+      expect(subject.options.client_options.token_url).to eq('/v2/oauth/accessToken')
     end
   end
 
@@ -79,7 +79,7 @@ private
 
 def raw_info_hash
   {
-    'mid'           => 'hoge',
+    'uid'           => 'hoge',
     'displayName'   => 'Foo Bar',
     'pictureUrl'    => 'http://xxx.com/aaa.jpg',
     'statusMessage' => 'Developer'

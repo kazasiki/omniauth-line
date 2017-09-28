@@ -2,7 +2,7 @@
 
 This gem contains the Line OAuth2 Strategy for OmniAuth.
 
-Supports the OAuth 2.0 Web Login. Read the Line developers docs for more details: https://developers.line.me/web-login/integrating-web-login
+Supports the OpenID Connect Web Login. Read the Line developers docs for more details: https://developers.line.me/en/docs/line-login/web/integrate-line-login/
 
 ## Using This Strategy
 

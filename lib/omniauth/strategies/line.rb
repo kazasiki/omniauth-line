@@ -29,6 +29,10 @@ module OmniAuth
         }
       end
 
+      def callback_url
+        full_host + script_name + callback_path
+      end
+
       # Require: Access token with PROFILE permission issued.
       def raw_info
         @raw_info ||= JSON.load(access_token.get('v2/profile').body)

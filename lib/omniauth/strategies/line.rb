@@ -8,6 +8,10 @@ module OmniAuth
       option :scope, 'profile openid'
 
       option :client_options, {
+        grant_type: 'authorization_code'
+      }
+
+      option :client_options, {
         site: 'https://access.line.me',
         authorize_url: '/oauth2/v2.1/authorize',
         token_url: '/oauth2/v2.1/token'

@@ -7,7 +7,7 @@ module OmniAuth
       option :name, 'line'
       option :scope, 'profile openid'
 
-      option :client_options, {
+      option :token_params, {
         grant_type: 'authorization_code'
       }
 
@@ -38,6 +38,17 @@ module OmniAuth
         @raw_info ||= JSON.load(access_token.get('v2/profile').body)
       rescue ::Errno::ETIMEDOUT
         raise ::Timeout::Error
+      end
+      
+      def build_access_token
+        verifier = request.params["code"]
+        get_token_params = {:redirect_uri => callback_url}.merge(token_params.to_hash(:symbolize_keys => true))
+        result = client.auth_code.get_token(verifier, get_token_params, deep_symbolize(options.auth_token_params))
+        return result
+      end
+      
+      def callback_url
+        full_host + script_name + callback_path
       end
 
     end

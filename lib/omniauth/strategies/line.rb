@@ -13,6 +13,8 @@ module OmniAuth
         token_url: '/oauth2/v2.1/token'
       }
 
+      option :token_option[:client_id, :client_secret]
+
       # host changed
       def callback_phase
         options[:client_options][:site] = 'https://api.line.me'

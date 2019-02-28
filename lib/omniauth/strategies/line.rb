@@ -25,7 +25,7 @@ module OmniAuth
         {
           name:        raw_info['displayName'],
           image:       raw_info['pictureUrl'],
-          description: raw_info['statusMessage']
+          description: raw_info['statusMessage'],
           email:       raw_info['email']
         }
       end

@@ -1,5 +1,6 @@
 require 'omniauth-oauth2'
 require 'json'
+require 'jwt'
 
 module OmniAuth
   module Strategies
@@ -26,7 +27,7 @@ module OmniAuth
           name:        raw_info['displayName'],
           image:       raw_info['pictureUrl'],
           description: raw_info['statusMessage'],
-          id_token:       access_token.params["id_token"]
+          id_token:    JWT.decode(access_token.params["id_token"], nil, false, { algorithm: 'HS256' }).email
         }
       end
 

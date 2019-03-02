@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'rake'
+gem 'jwt'
 
 group :test do
   gem 'rspec', '~> 3.2'

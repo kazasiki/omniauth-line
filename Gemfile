@@ -6,7 +6,7 @@ gem 'rake'
 gem 'jwt'
 
 group :test do
-  gem 'rspec', '>= 1.5.0'
+  gem 'rspec', '~> 3.2'
   gem 'rack-test'
   gem 'simplecov'
   gem 'webmock'

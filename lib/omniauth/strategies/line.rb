@@ -20,6 +20,10 @@ module OmniAuth
         super
       end
 
+      def callback_url
+        options[:redirect_uri] || (full_host + script_name + callback_path)
+      end
+
       uid { raw_info['userId'] }
 
       info do
@@ -37,6 +41,37 @@ module OmniAuth
       rescue ::Errno::ETIMEDOUT
         raise ::Timeout::Error
       end
+
+      # def custom_build_access_token
+      #   access_token = get_access_token(request)
+
+      #   # TODO: access_tokenを有効か確認する
+      #   # verify_hd(access_token)
+      #   access_token
+      # end
+      # alias build_access_token custom_build_access_token
+
+      private
+
+      # def get_access_token(request)
+      #   verifier = request.params['code']
+      #   client.auth_code.get_token(verifier, get_token_options(callback_url), deep_symbolize(options.auth_token_params))
+
+      #   if request.xhr? && request.params['code']
+      #     verifier = request.params['code']
+      #     redirect_uri = request.params['redirect_uri'] || 'postmessage'
+      #     client.auth_code.get_token(verifier, get_token_options(redirect_uri), deep_symbolize(options.auth_token_params || {}))
+      #   elsif request.params['code'] && request.params['redirect_uri']
+      #     verifier = request.params['code']
+      #     redirect_uri = request.params['redirect_uri']
+      #     client.auth_code.get_token(verifier, get_token_options(redirect_uri), deep_symbolize(options.auth_token_params || {}))
+      #   elsif verify_token(request.params['access_token'])
+      #     ::OAuth2::AccessToken.from_hash(client, request.params.dup)
+      #   else
+      #     verifier = request.params['code']
+      #     client.auth_code.get_token(verifier, get_token_options(callback_url), deep_symbolize(options.auth_token_params))
+      #   end
+      # end
 
     end
   end

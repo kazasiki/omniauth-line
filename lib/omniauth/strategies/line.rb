@@ -15,6 +15,7 @@ module OmniAuth
       }
 
       # host changed
+      # Duplicated
       def callback_phase
         options[:client_options][:site] = 'https://api.line.me'
         super
@@ -42,36 +43,7 @@ module OmniAuth
         raise ::Timeout::Error
       end
 
-      # def custom_build_access_token
-      #   access_token = get_access_token(request)
 
-      #   # TODO: access_tokenを有効か確認する
-      #   # verify_hd(access_token)
-      #   access_token
-      # end
-      # alias build_access_token custom_build_access_token
-
-      private
-
-      # def get_access_token(request)
-      #   verifier = request.params['code']
-      #   client.auth_code.get_token(verifier, get_token_options(callback_url), deep_symbolize(options.auth_token_params))
-
-      #   if request.xhr? && request.params['code']
-      #     verifier = request.params['code']
-      #     redirect_uri = request.params['redirect_uri'] || 'postmessage'
-      #     client.auth_code.get_token(verifier, get_token_options(redirect_uri), deep_symbolize(options.auth_token_params || {}))
-      #   elsif request.params['code'] && request.params['redirect_uri']
-      #     verifier = request.params['code']
-      #     redirect_uri = request.params['redirect_uri']
-      #     client.auth_code.get_token(verifier, get_token_options(redirect_uri), deep_symbolize(options.auth_token_params || {}))
-      #   elsif verify_token(request.params['access_token'])
-      #     ::OAuth2::AccessToken.from_hash(client, request.params.dup)
-      #   else
-      #     verifier = request.params['code']
-      #     client.auth_code.get_token(verifier, get_token_options(callback_url), deep_symbolize(options.auth_token_params))
-      #   end
-      # end
 
     end
   end

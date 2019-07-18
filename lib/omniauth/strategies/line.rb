@@ -5,7 +5,7 @@ module OmniAuth
   module Strategies
     class Line < OmniAuth::Strategies::OAuth2
       option :name, 'line'
-      option :scope, 'profile openid'
+      option :scope, 'profile%20openid'
       option :bot_prompt, 'normal'
 
       option :client_options, {
@@ -18,7 +18,7 @@ module OmniAuth
         options[:authorize_params] = {
           client_id: options['client_id'],
           response_type: 'code',
-          scopes: (options['scope']),
+          scope: (options['scope']),
           bot_prompt: options['bot_prompt']
         }
         super

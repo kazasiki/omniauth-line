@@ -6,12 +6,23 @@ module OmniAuth
     class Line < OmniAuth::Strategies::OAuth2
       option :name, 'line'
       option :scope, 'profile openid'
+      option :bot_prompt, 'normal'
 
       option :client_options, {
         site: 'https://access.line.me',
         authorize_url: '/oauth2/v2.1/authorize',
         token_url: '/oauth2/v2.1/token'
       }
+      
+      def request_phase
+        options[:authorize_params] = {
+          client_id: options['client_id'],
+          response_type: 'code',
+          scope: (options['scope']),
+          bot_prompt: options['bot_prompt']
+        }
+        super
+      end
 
       # host changed
       def callback_phase

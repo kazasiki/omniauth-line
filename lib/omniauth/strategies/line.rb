@@ -5,7 +5,7 @@ module OmniAuth
   module Strategies
     class Line < OmniAuth::Strategies::OAuth2
       option :name, 'line'
-      option :scope, 'profile%20openid'
+      option :scope, 'profile openid'
       option :bot_prompt, 'normal'
 
       option :client_options, {

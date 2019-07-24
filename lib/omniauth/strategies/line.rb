@@ -19,7 +19,7 @@ module OmniAuth
           client_id: options['client_id'],
           response_type: 'code',
           scope: (options['scope']),
-          bot_prompt: options['bot_prompt']
+          bot_prompt: 'normal'
         }
         super
       end

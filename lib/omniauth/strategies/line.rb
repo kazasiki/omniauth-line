@@ -5,12 +5,12 @@ module OmniAuth
   module Strategies
     class Line < OmniAuth::Strategies::OAuth2
       option :name, 'line'
-      option :scope, 'profile openid'
+      option :scope, 'profile openid email'
 
       option :client_options, {
-        site: 'https://access.line.me',
-        authorize_url: '/oauth2/v2.1/authorize',
-        token_url: '/oauth2/v2.1/token'
+          site: 'https://access.line.me',
+          authorize_url: '/oauth2/v2.1/authorize',
+          token_url: '/oauth2/v2.1/token'
       }
 
       # host changed
@@ -23,9 +23,10 @@ module OmniAuth
 
       info do
         {
-          name:        raw_info['displayName'],
-          image:       raw_info['pictureUrl'],
-          description: raw_info['statusMessage']
+            name:        raw_info['displayName'],
+            image:       raw_info['pictureUrl'],
+            description: raw_info['statusMessage'],
+            email:       id_token_payload['email']
         }
       end
 
@@ -36,6 +37,19 @@ module OmniAuth
         raise ::Timeout::Error
       end
 
+      # https://developers.line.biz/ja/reference/social-api/#verify-id-token
+      def id_token_payload
+        return {} if id_token.blank?
+
+        response = Faraday.post('https://api.line.me/oauth2/v2.1/verify', "id_token=#{id_token}&client_id=#{client.id}")
+        JSON.parse(response.body)
+      end
+
+      def id_token
+        @id_token ||= if access_token.present?
+                        access_token.params['id_token']
+                      end
+      end
     end
   end
 end

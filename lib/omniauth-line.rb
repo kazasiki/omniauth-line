@@ -1,2 +1,2 @@
 require "omniauth-line/version"
-require 'omniauth/strategies/line'
+require "omniauth/strategies/line"

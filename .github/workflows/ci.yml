@@ -1,0 +1,36 @@
+---
+name: test
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  job-test:
+    name: Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: [
+          '2.5',
+          '2.6',
+          '2.7',
+          '3.0'
+          ]
+      
+    steps:
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+
+      - name: Check out source code
+        uses: actions/checkout@v2
+
+      - name: Bundler
+        run: |
+          gem install bundler
+          bundle install
+      - name: Run test
+        run: bundle exec rake

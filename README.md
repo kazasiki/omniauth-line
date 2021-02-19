@@ -45,4 +45,4 @@ An example auth hash available in `request.env['omniauth.auth']`:
 
 ## Supported Rubies
 
-OmniAuth Line is tested under 2.1.x, 2.2.x.
+OmniAuth Line is tested under 2.5 ~ 3.0.

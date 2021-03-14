@@ -73,6 +73,15 @@ describe OmniAuth::Strategies::Line do
     end
   end
 
+  describe '#callback_url' do
+    it 'should returns callback url' do
+      base_url = 'https://example.com'
+      allow(subject).to receive(:full_host) { base_url }
+      allow(subject).to receive(:script_name) { '/v1' }
+      expect(subject.send(:callback_url)).to eq "#{base_url}/v1/auth/line/callback"
+    end
+  end
+
 end
 
 private

@@ -5,9 +5,9 @@ require "omniauth-line/version"
 Gem::Specification.new do |s|
   s.name        = "omniauth-line"
   s.version     = OmniAuth::Line::VERSION
-  s.authors     = ["kazasiki"]
-  s.email       = ["kazasiki@gmail.com"]
-  s.homepage    = "https://github.com/kazasiki/omniauth-line"
+  s.authors     = ["yskey2"]
+  s.email       = ["y.kasuga@gochi-tip.co.jp"]
+  s.homepage    = "https://github.com/gochi-tip/omniauth-line"
   s.description = %q{OmniAuth strategy for Line}
   s.summary     = s.description
   s.license     = "MIT"

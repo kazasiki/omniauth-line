@@ -12,6 +12,7 @@ module OmniAuth
         authorize_url: '/oauth2/v2.1/authorize',
         token_url: '/oauth2/v2.1/token'
       }
+      option :pkce, true
 
       # host changed
       def callback_phase

@@ -12,6 +12,7 @@ module OmniAuth
         authorize_url: '/oauth2/v2.1/authorize',
         token_url: '/oauth2/v2.1/token'
       }
+      option :pkce, true
 
       # host changed
       def callback_phase
@@ -30,7 +31,8 @@ module OmniAuth
         {
           name:        raw_info['displayName'],
           image:       raw_info['pictureUrl'],
-          description: raw_info['statusMessage']
+          description: raw_info['statusMessage'],
+          email: JWT.decode(access_token['id_token'], ENV.fetch('LINE_CHANNEL_SECRET', nil)).first['email']
         }
       end
 

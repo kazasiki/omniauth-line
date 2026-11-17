@@ -1,0 +1,56 @@
+name: Release to RubyGems
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test (Ruby ${{ matrix.ruby-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby-version:
+          - '3.1'
+          - '3.2'
+          - '3.3'
+          - '3.4'
+
+    steps:
+      - name: Check out source code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true
+
+      - name: Run tests
+        run: bundle exec rake
+
+  release:
+    name: Build and Push Gem
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Check out source code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+
+      - name: Release to RubyGems
+        uses: rubygems/release-gem@v1
